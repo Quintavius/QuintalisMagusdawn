@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/Prototype/Movement.unity
-  isLoaded: 1
-  isActive: 1
