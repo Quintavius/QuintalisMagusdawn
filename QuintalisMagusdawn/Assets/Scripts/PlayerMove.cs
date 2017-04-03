@@ -5,24 +5,30 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour {
     public float moveSpeed = 1;
     public CharacterController controller;
+    public GameObject boom;
+    public float lookSpeed = 1;
 
 	// Use this for initialization
 	void Start () {
         //Grab controller
-        CharacterController controller = GetComponent<CharacterController>();
-
+        controller = GetComponent<CharacterController>();
+        boom = GameObject.FindWithTag("CameraBoom");
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        //Basic Movement
         var hSpeed = Input.GetAxis("Horizontal");
         var vSpeed = Input.GetAxis("Vertical");
+ 
+        var moveDir = new Vector3(hSpeed, 0, vSpeed);                    //Give me a world based movement vector
+        moveDir = Camera.main.transform.TransformDirection(moveDir);     //Slap that shit on the camera
+        controller.SimpleMove(moveDir * moveSpeed);                      //holy shit we movin
 
-        //Give me a world based movement vector
-        var moveDir = new Vector3(hSpeed * moveSpeed,0, vSpeed * moveSpeed);
-        //Slap that shit on the camera
-        moveDir = Camera.main.transform.TransformDirection(moveDir);
-        //holy shit we movin
-        controller.SimpleMove(moveDir);
-	}
+        //Camera Control
+        var hLook = Input.GetAxis("LookHorizontal");
+        //var vLook = Input.GetAxis("LookVertical");                    //Let's not for now
+
+        boom.transform.Rotate(0, hLook * lookSpeed, 0);
+    }
 }
