@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour {
     public float cameraHeight = 0.8f;
     public AnimationCurve panCurve;
     [SerializeField]
-    [Range(0f, 1f)]
+    [Range(0f, 3f)]
     public float lerpSpeed = 0.02f;
 
     [Header("Debug Values")]
