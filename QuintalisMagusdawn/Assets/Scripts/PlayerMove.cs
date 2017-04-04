@@ -9,32 +9,25 @@ public class PlayerMove : MonoBehaviour {
     public float hVelocity = 0f;
     public float vVelocity = 0f;
     public float maximumOffset = 4;
-    public float cameraDistance = -7.5f;
     public float cameraHeight = 0.8f;
-    public AnimationCurve panCurve;
     [SerializeField]
     [Range(0f, 3f)]
     public float lerpSpeed = 0.02f;
 
-    [Header("Debug Values")]
-    public float hSpeed;
-    public float vSpeed;
-    public float hLook;
-    public CharacterController controller;
-    public GameObject boom;
-    public Vector3 cameraStart;
-    public Vector3 startOffset;
-    public Vector3 moveDir;
-    public Vector3 camPos;
-    public float hMod = 0f;
-    public float vMod = 0f;
+    float hSpeed;
+    float vSpeed;
+    float hLook;
+    CharacterController controller;
+    GameObject boom;
+    Vector3 moveDir;
+    float hMod = 0f;
+    float vMod = 0f;
 
     // Use this for initialization
     void Start () {
         //Grab controller
         controller = GetComponent<CharacterController>();
         boom = GameObject.FindWithTag("CameraBoom");
-        startOffset = Camera.main.transform.localPosition;
 	}
 	
 	// Update is called once per frame
