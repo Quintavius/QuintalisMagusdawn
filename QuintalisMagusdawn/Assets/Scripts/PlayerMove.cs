@@ -17,6 +17,7 @@ public class PlayerMove : MonoBehaviour {
     float hSpeed;
     float vSpeed;
     float hLook;
+    float vLook;
     CharacterController controller;
     GameObject boom;
     Vector3 moveDir;
@@ -40,10 +41,14 @@ public class PlayerMove : MonoBehaviour {
         }
 
         hLook = Input.GetAxis("LookHorizontal");
-        if (hLook != 0)
+        vLook = Input.GetAxis("LookVertical");
+        if (hLook != 0 || vLook != 0)
         {
             RotateCamera();
         }
+
+        //Point camera at player
+        Camera.main.transform.LookAt(boom.transform);
 
         //Move the BOOM towards player movement
         var camTarget = Vector3.zero;
@@ -77,6 +82,9 @@ public class PlayerMove : MonoBehaviour {
     {
         //var vLook = Input.GetAxis("LookVertical");                    //Let's not for now
         //Move Boom, not Camera
-        boom.transform.Rotate(0, hLook * lookSpeed, 0);
+        //boom.transform.Rotate(0, hLook * lookSpeed, 0);
+        Camera.main.transform.RotateAround(boom.transform.position,Vector3.up,hLook*lookSpeed);
+        Camera.main.transform.RotateAround(boom.transform.position, Camera.main.transform.right, vLook * lookSpeed);
+
     }
 }
