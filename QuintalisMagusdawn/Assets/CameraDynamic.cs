@@ -9,6 +9,8 @@ public class CameraDynamic : MonoBehaviour {
     public float speedToFixClipping = 0.2f;
     public float smoothing;
     public Vector3 offset;
+    public Vector3 pos;
+    public float moveVal;
 
 	// Use this for initialization
 	void Start () {
@@ -36,14 +38,16 @@ public class CameraDynamic : MonoBehaviour {
                 {
                     continue;
                 }
-                if (!Physics.SphereCast(localPos, sphereRadius, Camera.main.transform.forward * -1, out hit, spherecastDistance))
+                if (!Physics.SphereCast(pos, sphereRadius, Camera.main.transform.forward * -1, out hit, spherecastDistance))
                 {
                     Debug.Log("Fixing");
-                    localPos.z = i;
+                    //localPos.z = i;
+                    moveVal = i;
                     break;
                 }
             }
         }
-        transform.localPosition = Vector3.Lerp(transform.localPosition, localPos, smoothing * Time.deltaTime);
+        //transform.localPosition = Vector3.Lerp(transform.localPosition, localPos, smoothing * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(pos, transform.parent.position, moveVal);
     }
 }
