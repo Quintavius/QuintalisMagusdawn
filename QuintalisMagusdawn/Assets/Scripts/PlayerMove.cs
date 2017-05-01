@@ -56,10 +56,10 @@ public class PlayerMove : MonoBehaviour {
         hMod = Mathf.SmoothDamp(hMod,hSpeed, ref hVelocity,lerpSpeed);
         vMod = Mathf.SmoothDamp(vMod, vSpeed, ref vVelocity, lerpSpeed);
         camTarget = new Vector3(hMod * maximumOffset, 0,vMod * maximumOffset);
-        camTarget = boom.transform.TransformDirection(camTarget);
+        camTarget = Camera.main.transform.TransformDirection(camTarget);
 
-        boom.transform.localPosition = camTarget;
-        boom.transform.localPosition += new Vector3(0, cameraHeight,0);
+       // boom.transform.localPosition = camTarget;
+        //boom.transform.localPosition += new Vector3(0, cameraHeight,0);
     } 
 
     void MovePlayer()
@@ -83,8 +83,8 @@ public class PlayerMove : MonoBehaviour {
         //var vLook = Input.GetAxis("LookVertical");                    //Let's not for now
         //Move Boom, not Camera
         //boom.transform.Rotate(0, hLook * lookSpeed, 0);
-        boom.transform.RotateAround(controller.transform.position,Vector3.up,hLook*lookSpeed);
-        boom.transform.RotateAround(controller.transform.position, Camera.main.transform.right, vLook * lookSpeed);
+        Camera.main.transform.RotateAround(controller.transform.position,Vector3.up,hLook*lookSpeed);
+        Camera.main.transform.RotateAround(controller.transform.position, Camera.main.transform.right, vLook * lookSpeed);
 
     }
 }
