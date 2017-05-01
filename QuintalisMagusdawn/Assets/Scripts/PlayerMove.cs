@@ -83,8 +83,8 @@ public class PlayerMove : MonoBehaviour {
         //var vLook = Input.GetAxis("LookVertical");                    //Let's not for now
         //Move Boom, not Camera
         //boom.transform.Rotate(0, hLook * lookSpeed, 0);
-        Camera.main.transform.RotateAround(boom.transform.position,Vector3.up,hLook*lookSpeed);
-        Camera.main.transform.RotateAround(boom.transform.position, Camera.main.transform.right, vLook * lookSpeed);
+        boom.transform.RotateAround(controller.transform.position,Vector3.up,hLook*lookSpeed);
+        boom.transform.RotateAround(controller.transform.position, Camera.main.transform.right, vLook * lookSpeed);
 
     }
 }
