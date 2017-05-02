@@ -34,16 +34,19 @@ public class CameraDynamic : MonoBehaviour {
         Vector3 camPos = Camera.main.transform.position;
         Vector3 playerDir = Camera.main.transform.forward;
         Vector3 playerPos = player.transform.position;
+        Vector3 camDir = playerDir * -1;
+
         float camDist = Vector3.Distance(camPos, playerPos);
 
-        if (Physics.Raycast(camPos, playerDir, out camHit, raycastDistance))
+        if (Physics.Raycast(playerPos, camDir, out camHit, raycastDistance))
         {
-            if (!camHit.collider.CompareTag("Player"))
+            Debug.DrawRay(playerPos, camDir, Color.red);
+            if (!camHit.collider.CompareTag("MainCamera"))
             {
                 Debug.Log("Something in front of player, move closer");
                 Camera.main.transform.position = Vector3.MoveTowards(camPos, playerPos, smoothing);
             }
-            else if (!col)
+            else //if (!col)
             {
                 if (camDist <= offset)
                 {
